@@ -1,5 +1,11 @@
 'use client'
-import { useState } from 'react';
+
+import {useState} from 'react';
+import {useRouter} from "next/navigation";
+import {useEffect} from "react";
+
+
+
 
 function DropdownMenu() {
     const [isOpen, setIsOpen] = useState(false);
@@ -10,11 +16,18 @@ function DropdownMenu() {
         { value: '2022-2023', label: '2022-2023' },
         { value: '2021-2022', label: '2021-2022' },
     ];
-
+    const router = useRouter()
     const handleOptionClick = (value, label) => {
         setSelectedOption(label);
         setIsOpen(false);
+
+
     };
+
+    useEffect(() => {
+        // Push the new route and disable scrolling
+        router.push(`?year=${selectedOption}`, undefined, { scroll: false });
+    }, [selectedOption, router]);
 
     return (
         <div className="relative mt-4">
@@ -49,14 +62,14 @@ function DropdownMenu() {
                         className="absolute z-10 mt-2 max-h-60 w-full overflow-auto rounded-md bg-white py-1 text-base shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
                         role="listbox"
                         aria-labelledby="headlessui-listbox-button-:R1l56:"
-                        style={{ display: isOpen ? 'block' : 'none' }} // Add this line
+                        style={{ display: isOpen ? 'block' : 'none' }}
                     >
                         {options.map((option, index) => (
                             <li
                                 key={index}
                                 onClick={() => handleOptionClick(option.value, option.label)}
                                 className={`${
-                                    selectedOption === option.label ? 'bg-blue-100' : ''
+                                    selectedOption === option.label ? 'bg-blue-200' : ''
                                 } cursor-pointer select-none py-2 pl-3 pr-9`}
                                 role="option"
                                 tabIndex={index}
