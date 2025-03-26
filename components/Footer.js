@@ -12,7 +12,9 @@ const Footer = () => {
                             </svg>
                         </a>
                     </div>
-                    <p className="mt-6 text-sm text-slate-500 sm:mt-0">Copyright © 2023 dSquare. All rights reserved.</p>
+                    <p className="mt-6 text-sm text-slate-500 sm:mt-0">
+                        Copyright © {new Date().getFullYear()} dSquare. All rights reserved.
+                    </p>
                 </div>
             </div>
         </footer>
